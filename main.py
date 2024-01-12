@@ -2,7 +2,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score
 import pandas as pd
 
 # Muat data
@@ -27,9 +27,11 @@ svc_model.fit(X_train_scaled, y_train)
 # Prediksi data uji
 y_pred_svc = svc_model.predict(X_test_scaled)
 
-# Tampilkan akurasi SVC
+# Tampilkan akurasi dan presisi SVC
 accuracy_svc = accuracy_score(y_test, y_pred_svc)
+precision_svc = precision_score(y_test, y_pred_svc, average='weighted')
 print(f"Akurasi SVC: {(accuracy_svc * 100):.2f}%")
+print(f"Presisi: {precision_svc * 100:.2f}%")
 
 # Model ANN
 ann_model = MLPClassifier(
@@ -42,6 +44,8 @@ ann_model.fit(X_train_scaled, y_train)
 # Prediksi data uji
 y_pred_ann = ann_model.predict(X_test_scaled)
 
-# Tampilkan akurasi ANN
+# Tampilkan akurasi dan presisi ANN
 accuracy_ann = accuracy_score(y_test, y_pred_ann)
+precision_ann = precision_score(y_test, y_pred_ann, average='weighted')
 print(f"Akurasi ANN: {(accuracy_ann * 100):.2f}%")
+print(f"Presisi: {precision_ann * 100:.2f}%")
